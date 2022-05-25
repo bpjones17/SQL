@@ -1,0 +1,17 @@
+--Check out my sneaker store database
+
+CREATE TABLE sneaker_inventory (id INTEGER PRIMARY KEY, name TEXT, size INTEGER, quantity INTEGER, price INTEGER);
+INSERT INTO sneaker_inventory VALUES 
+(1, "AJ1 Bloodline", 11, 3, 190),
+(2, "AJ4 Military Black", 9, 3, 300),
+(3, "AJ11 Cool Grey", 12, 3, 310),
+(4, "AJ2 A Ma Maniere", 10,3, 350),
+(5, "AJ6 Maroon", 11, 3, 110);
+
+--Display sneakers that are $200 or more
+--Then, order by price
+SELECT * FROM sneaker_inventory WHERE price >= 200
+ORDER BY price;
+
+--How many sneakers are in the store's inventory?
+SELECT SUM(quantity) FROM sneaker_inventory;
