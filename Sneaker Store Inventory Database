@@ -1,4 +1,4 @@
---Check out my sneaker store database
+/*Check out my sneaker store database*/
 
 CREATE TABLE sneaker_inventory (id INTEGER PRIMARY KEY, name TEXT, size INTEGER, quantity INTEGER, price INTEGER);
 INSERT INTO sneaker_inventory VALUES 
@@ -6,12 +6,24 @@ INSERT INTO sneaker_inventory VALUES
 (2, "AJ4 Military Black", 9, 3, 300),
 (3, "AJ11 Cool Grey", 12, 3, 310),
 (4, "AJ2 A Ma Maniere", 10,3, 350),
-(5, "AJ6 Maroon", 11, 3, 110);
+(5, "AJ6 Maroon", 11, 3, 110),
+(6, "Cactus Jack AM1 Brown", 8, 2, 500),
+(7, "Cactus Jack AM1 Gold", 11, 4, 550),
+(8, "Cactus Jack Air Trainer 1 Grey", 10, 1, 350),
+(9, "Cactus Jack Air Trainer 1 Brown", 12, 2, 375),
+(10, "Dunk Low Supreme Black", 11, 1, 850);
 
---Display sneakers that are $200 or more
---Then, order by price
-SELECT * FROM sneaker_inventory WHERE price >= 200
+/*Display sneakers that are $350 or more. Then, order by price*/
+
+SELECT * FROM sneaker_inventory WHERE price >= 350
 ORDER BY price;
 
---How many sneakers are in the store's inventory?
+/*How many sneakers are in the store's inventory?*/
+
 SELECT SUM(quantity) FROM sneaker_inventory;
+
+/*What is the value of the inventory total in price?*/
+
+SELECT SUM(price) FROM sneaker_inventory;
+
+
