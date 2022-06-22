@@ -1,0 +1,74 @@
+/* In this SQL, I'm querying a database with multiple tables in it to quantify statistics about customer and order data. */
+
+
+
+/*1.How many orders were placed in January?*/
+SELECT COUNT(orderID)
+FROM BIT_DB.JanSales
+
+/* Answer = 9723 orders placed in January */
+
+
+
+
+/*2.How many of those orders were for an iPhone?*/
+SELECT COUNT(orderID)
+FROM BIT_DB.JanSales
+WHERE product = "iPhone"
+
+/* Answer = 379 iPhone orders in January*/
+
+
+
+
+/*3.Select the customer account numbers for all the orders that were placed in February.*/
+SELECT acctnum
+FROM BIT_DB.customers cust
+INNER JOIN BIT_DB.FebSales Feb
+ON cust.order_ID=Feb.orderID
+
+/*Answer = Selected all 1000 customer account numbers for orders placed in February*/
+
+
+
+
+/*4.Which product was the cheapest one sold in January, and what was the price?*/
+SELECT distinct Product, price 
+FROM BIT_DB.JanSales
+WHERE price IN (SELECT min(price) FROM BIT_DB.JanSales)
+
+/*Answer = AAA Batteries (4-pack) - $2.99*/
+
+
+
+
+/*5.What is the total revenue for each product sold in January?*/
+SELECT SUM(quantity)*price as revenue, product
+FROM BIT_DB.JanSales
+GROUP BY product
+
+/*Answer = displayed all products and their revenue for January*/
+
+
+
+
+/*6.Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?*/
+SELECT SUM(quantity), product,
+SUM(quantity)*price as revenue
+FROM BIT_DB.FebSales
+WHERE location = "548 Lincoln St, Seattle, WA 98101"
+GROUP BY product
+
+/*Answer = SUM: 2, Product: AA Batteries(4-pack), revenue: $7.68*/
+
+
+
+
+/*7.How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?*/
+SELECT COUNT(cust.acctnum), AVG(quantity)*price
+FROM BIT_DB.FebSales Feb
+LEFT JOIN BIT_DB.customers cust
+ON Feb.orderID=cust.order_ID
+WHERE Feb.Quantity>2
+
+/*Answer = 890 customers ordered 2 products at a time in February and the average price spent by those customers was $3.86(Rounded)*/
